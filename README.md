@@ -43,7 +43,12 @@ When a new segments received: do one of the following:
 3. If seq not in SET, Type of segment is Data, get it payload and compute it checksum, if the 	checksum is not as same as the checksum in header. Packet corrupt, discard it.
 4. If seq not in SET, Type of segment is Data, Checksum is correct which a valid new segment received. Add it seq number in SET, add it into buffer. If the seq of received packet equal to 	current ack, update ack number by information in header. As the segments are come with 	wrong order, ack should also be update by check the received seq in SET. Otherwise, we 	received a segment with larger seq, no need to update ack, just send last ack segments again.
 
+## Diagram of STP header
+STP Header is implemented by an Integer array as it is easy to set and check value. Header will be convert to Bytes array and link with dataPorion and then forward it to UDP.
 
+![alt text][header]
+
+[header]: https://github.com/r0bertLiu/reliable-transport-protocol/blob/master/img/header.jpg "overall header and package"
 
 ## Usage
 ### Sender.javaU
