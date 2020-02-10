@@ -1,10 +1,22 @@
-#A reliable transport protocol
-> This is a UNSW MIT project for course 9044/2041.
+# A reliable transport protocol
+> This is a UNSW MIT project for course 9331.
 
 ## introduction
 This project have implemented a simple transport protocol(STP) based on UDP socket write in JAVA and most of features in TCP are realized. There is a PLD module as well which can simulate the real internet environment.
 
-##
+## STP sender
+To realized the features of TCP, STP sender use three threads:
+### Thread1: SendingThread(EVENT1 Send packet)
+Sending thread is use to keep create and send new packets if there is enough space in	window. __Window__ is implemented by an Vector object(array). If the current seq 	__number(lastbytessend)__ minus __sendBase(LastByteAcked)__ is lower than MWS, then add this segment in window and sent it to PLD. After that we update the seq number by seq += mss(except last packet). If the segments send this time is the only one segment in window 	currently, start/restart Timer.
+
+### Thread2: ReceivingThread(EVENT2 ACK received)
+Receiving thread will continue collect the upcoming packets, it will block until a new 	packet received. When a new packet received, try to do one of below:
+a) If the ack of received segment is larger than __sendBase__ which means a new ack received, set new __sendBase__ and use curr ack received to update window(delete segment with seq lower than sendBase). If __Window__ is not empty, there are not-yet-ack segments in window, restart timer.		
+b) If ack is not larger than __sendBase__, last ack received (curr ack received must equal to sendBase). We increase the __dupCounter__ by plus 1. If __dupCounter__ equal to 3, do fast retransmission by resent segments with smallest seq number which is segments in Window[0] currently as window is append in correct order. After retransmission restart 	timer.
+
+### Thread3: TimerThread(EVENT3 Timout)
+There is a while loop in Timer thread, so when we start this thread it will keep looping 	until we received last segments. Timer thread will first sleep for a RTO time, if it is 	interrupt(restart) 	by other thread during sleep, it continue the while and sleep again for a RTO time, if it not interrupt by other and finish sleep which mean timout, it will retransmits 	smaller segments like fast retransmission mentioned before.
+
 
 ## user manual
 ### Sender.java
