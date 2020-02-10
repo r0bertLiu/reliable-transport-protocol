@@ -11,8 +11,8 @@ Sending thread is use to keep create and send new packets if there is enough spa
 
 ### Thread2: ReceivingThread(EVENT2 ACK received)
 Receiving thread will continue collect the upcoming packets, it will block until a new 	packet received. When a new packet received, try to do one of below:
-a) If the ack of received segment is larger than __sendBase__ which means a new ack received, set new __sendBase__ and use curr ack received to update window(delete segment with seq lower than sendBase). If __Window__ is not empty, there are not-yet-ack segments in window, restart timer.		
-b) If ack is not larger than __sendBase__, last ack received (curr ack received must equal to sendBase). We increase the __dupCounter__ by plus 1. If __dupCounter__ equal to 3, do fast retransmission by resent segments with smallest seq number which is segments in Window[0] currently as window is append in correct order. After retransmission restart 	timer.
+1. If the ack of received segment is larger than __sendBase__ which means a new ack received, set new __sendBase__ and use curr ack received to update window(delete segment with seq lower than sendBase). If __Window__ is not empty, there are not-yet-ack segments in window, restart timer.		
+3. If ack is not larger than __sendBase__, last ack received (curr ack received must equal to sendBase). We increase the __dupCounter__ by plus 1. If __dupCounter__ equal to 3, do fast retransmission by resent segments with smallest seq number which is segments in Window[0] currently as window is append in correct order. After retransmission restart 	timer.
 
 ### Thread3: TimerThread(EVENT3 Timout)
 There is a while loop in Timer thread, so when we start this thread it will keep looping 	until we received last segments. Timer thread will first sleep for a RTO time, if it is 	interrupt(restart) 	by other thread during sleep, it continue the while and sleep again for a RTO time, if it not interrupt by other and finish sleep which mean timout, it will retransmits 	smaller segments like fast retransmission mentioned before.
