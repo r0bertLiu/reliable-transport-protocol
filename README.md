@@ -25,6 +25,7 @@ To simulate real internet environment, The PLD module will take the following ev
 3. Create bit errors within packets (a single bit error) 
 4. Transmits out of order packets 
 5. Delays packets 
+
 ⋅⋅⋅ __Drop__ and __Dup__ are just straight line. __Corrupt__ is implemented by change the first byte of dataPortion. If this byte is from 0 ~ 127 convert it to -128 ~ -1 which will change first bit(first bit of byte in java is 	represent positive or negative). Otherwise -128 ~ -1 byte convert it to 0 ~ 127. __Reorder__ realized by first set there is a currently reoder packets. And count when other packest send. __Delay__ is implemented by thread, this thread will first sleep for a random time(less than maxdelay), then send the delay packet.
 
 ### STP Receiver
