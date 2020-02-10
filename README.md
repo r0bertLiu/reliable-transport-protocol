@@ -3,6 +3,9 @@
 
 ## Introduction
 This project have implemented a simple transport protocol(STP) based on UDP socket write in JAVA and most of features in TCP are realized. There is a PLD module as well which can simulate the real internet environment.
+![alt text][stucture]
+
+[stucture]: https://github.com/r0bertLiu/reliable-transport-protocol/blob/master/img/structure.png "overall stucture"
 
 ## Implementation
 ### STP Sender
