@@ -1,7 +1,7 @@
 # A reliable transport protocol
 > This is a UNSW MIT project for course 9331.
 
-## introduction
+## Introduction
 This project have implemented a simple transport protocol(STP) based on UDP socket write in JAVA and most of features in TCP are realized. There is a PLD module as well which can simulate the real internet environment.
 
 ## Implementation
@@ -41,8 +41,8 @@ When a new segments received: do one of the following:
 
 
 
-## user manual
-### Sender.java
+## Usage
+### Sender.javaU
 The Sender should accept the following fourteen (14) arguments   
 1. receiver_host_ip: The IP address of the host machine on which the Receiver is running.  
 2. receiver_port: The port number on which Receiver is expecting to receive packets from the sender.  
