@@ -46,9 +46,9 @@ When a new segments received: do one of the following:
 ## Diagram of STP header
 STP Header is implemented by an Integer array as it is easy to set and check value. Header will be convert to Bytes array and link with dataPorion and then forward it to UDP.
 
-![alt text][header]
+![alt text][package]
 
-[header]: https://github.com/r0bertLiu/reliable-transport-protocol/blob/master/img/header.jpg "overall header and package"
+[package]: https://github.com/r0bertLiu/reliable-transport-protocol/blob/master/img/package.jpg "overall header and package"
 
 ## Usage
 ### Sender.javaU
